@@ -83,9 +83,14 @@ def get_reports():
             excel_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, """excel""")))
             excel_button.click()
 
-            reports["English Intake"] = pd.read_excel(get_latest_download(), sheet_name="Calls")
+            latest_download = get_latest_download()
+
+            reports["English Intake"] = pd.read_excel(latest_download, sheet_name="Calls",engine='openpyxl')
+
+            os.remove(latest_download)
 
             print("Successfully got English Intake queue calls.")
+
             break
         except Exception as error:
             print(f'Failed to get English Intake queue calls on try {tries + 1}.')
@@ -109,7 +114,11 @@ def get_reports():
             excel_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, """excel""")))
             excel_button.click()
 
-            reports["Spanish Intake"] = pd.read_excel(get_latest_download(), sheet_name="Calls")
+            latest_download = get_latest_download()
+
+            reports["Spanish Intake"] = pd.read_excel(latest_download, sheet_name="Calls",engine='openpyxl')
+
+            os.remove(latest_download)
 
             print("Successfully got Spanish Intake queue calls.")
             break
@@ -135,7 +144,11 @@ def get_reports():
             excel_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, """excel""")))
             excel_button.click()
 
-            reports["English Reception"] = pd.read_excel(get_latest_download(), sheet_name="Calls")
+            latest_download = get_latest_download()
+
+            reports["English Reception"] = pd.read_excel(latest_download, sheet_name="Calls",engine='openpyxl')
+
+            os.remove(latest_download)
 
             print("Successfully got English Reception queue calls.")
             break
@@ -162,7 +175,11 @@ def get_reports():
             excel_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, """excel""")))
             excel_button.click()
 
-            reports["Spanish Reception"] = pd.read_excel(get_latest_download(), sheet_name="Calls")
+            latest_download = get_latest_download()
+
+            reports["Spanish Reception"] = pd.read_excel(latest_download, sheet_name="Calls",engine='openpyxl')
+
+            os.remove(latest_download)
 
             print("Successfully got Spanish Reception queue calls.")
             break
@@ -216,7 +233,11 @@ def get_reports():
             excel_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, """excel""")))
             excel_button.click()
 
-            reports["Queue Calls"] = pd.read_excel(get_latest_download(), sheet_name="Calls")
+            latest_download = get_latest_download()
+
+            reports["Queue Calls"] = pd.read_excel(latest_download, sheet_name="Calls",engine='openpyxl')
+
+            os.remove(latest_download)
 
             print("Successfully got Queue calls.")
             break
@@ -267,7 +288,11 @@ def get_reports():
             excel_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, """excel""")))
             excel_button.click()
 
-            reports["IVR"] = pd.read_excel(get_latest_download(), sheet_name="Calls")
+            latest_download = get_latest_download()
+
+            reports["IVR"] = pd.read_excel(latest_download, sheet_name="Calls",engine='openpyxl')
+
+            os.remove(latest_download)
 
             print("Successfully got Top Level IVR calls.")
             break

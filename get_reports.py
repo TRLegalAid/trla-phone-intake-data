@@ -27,6 +27,10 @@ atexit.register(close_driver)
 
 # returns name of most recent file in downloads
 def get_latest_download():
+
+    #wait timer for debug purposes
+    time.sleep(10)
+
     all_download = glob.glob(os.path.expanduser('~')+"/Downloads/*")
     latest_download = max(all_download, key=os.path.getmtime)
     return latest_download
@@ -135,7 +139,7 @@ def get_reports():
             queues_drop_down_button.click()
             time.sleep(2)
 
-            trla_reception_english_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[4]/div/div/div[2]/div/div[1]/div/div[2]/div/div/div[9]""")))
+            trla_reception_english_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[4]/div/div/div[2]/div/div[1]/div/div[2]/div/div/div[8]""")))
             trla_reception_english_button.click()
 
             download_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[1]/div[2]/div/div[2]/div[1]/div/div/button""")))
@@ -218,10 +222,10 @@ def get_reports():
             intake_spanish_checkbox = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div/div[2]/div/div[1]/div[1]/div[2]/div[2]/div/div/div[2]/div[5]""")))
             intake_spanish_checkbox.click()
 
-            reception_english_checkbox = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div/div[2]/div/div[1]/div[1]/div[2]/div[2]/div/div/div[2]/div[7]""")))
+            reception_english_checkbox = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div/div[2]/div/div[1]/div[1]/div[2]/div[2]/div/div/div[2]/div[6]""")))
             reception_english_checkbox.click()
 
-            reception_spanish_checkbox = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div/div[2]/div/div[1]/div[1]/div[2]/div[2]/div/div/div[2]/div[8]""")))
+            reception_spanish_checkbox = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div/div[2]/div/div[1]/div[1]/div[2]/div[2]/div/div/div[2]/div[7]""")))
             reception_spanish_checkbox.click()
 
             done_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div/div[2]/div/div[1]/div[2]/div[2]/button[2]""")))

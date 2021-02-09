@@ -4,7 +4,7 @@ import pandas as pd
 import simplejson as json
 from dotenv import load_dotenv
 from oauth2client.service_account import ServiceAccountCredentials
-from get_reports import combine_reports
+from get_reports_s import combine_reports
 
 load_dotenv()
 

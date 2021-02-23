@@ -50,7 +50,6 @@ def get_reports():
     foobar_file = open(foobar_path,"w")
     foobar_file.close()
 
-
     authorize_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[1]/div[2]/button""")))
     authorize_button.click()
 
@@ -170,8 +169,7 @@ def get_reports():
             print(f'Failed to get English Reception queue calls on try {tries + 1}.')
             if tries == 4:
                 print(f"Failed to get English Reception queue calls on all 5 attempts, here's the last error message:\n{error}.")
-                exit()
-
+                #exit()
 
     # get spanish reception queue calls
     for tries in range(5):
@@ -201,7 +199,7 @@ def get_reports():
             print(f'Failed to get Spanish Reception queue calls on try {tries + 1}.')
             if tries == 4:
                 print(f"Failed to get Spanish Reception queue calls on all 5 attempts, here's the last error message:\n{error}.")
-                exit()
+                #exit()
 
 
     time.sleep(3)
@@ -264,9 +262,7 @@ def get_reports():
                 print(f"Failed to get Queue calls on all 5 attempts, here's the last error message:\n{error}.")
                 exit()
 
-
     time.sleep(3)
-
     # get Top Level IVR Calls
     for tries in range(5):
         try:
@@ -325,7 +321,6 @@ def get_reports():
 
     time.sleep(3)
     input("All done - press enter and the chrome browser will close.\n")
-
     os.remove(foobar_path)
 
     return reports

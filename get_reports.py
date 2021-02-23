@@ -312,7 +312,8 @@ def get_reports():
 
 def combine_reports():
     reports = get_reports()
-    calls_report = reports["English Intake"].append(reports["Spanish Intake"]).append(reports["English Reception"]).append(reports["Spanish Reception"])
+    calls_report = reports["English Intake"].append(reports["Spanish Intake"])
+    #.append(reports["English Reception"]).append(reports["Spanish Reception"])
     return {"Top Level IVR": reports["IVR"], "All Queues": reports["Queue Calls"], "Calls": calls_report}
 
 

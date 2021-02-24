@@ -45,6 +45,11 @@ def get_latest_download_s():
 def open_save_excel_file(file_path):
     wb = openpyxl.load_workbook(file_path)
     wb.save(file_path)
+    #check if sheet has "calls"
+    if("Calls" in wb.sheetnames):
+        return True
+    else:
+        return False
 
 
 def get_reports():
@@ -105,9 +110,12 @@ def get_reports():
 
             latest_download = get_latest_download_s()
 
-            open_save_excel_file(latest_download)
+            has_calls = open_save_excel_file(latest_download)
 
-            reports["English Intake"] = pd.read_excel(latest_download, sheet_name="Calls",engine='openpyxl')
+            if(has_calls):
+                reports["English Intake"] = pd.read_excel(latest_download, sheet_name="Calls",engine='openpyxl')
+            else:
+                reports["English Intake"] = pd.DataFrame()
 
             os.remove(latest_download)
 
@@ -138,10 +146,12 @@ def get_reports():
 
             latest_download = get_latest_download_s()
 
-            open_save_excel_file(latest_download)
+            has_calls = open_save_excel_file(latest_download)
 
-
-            reports["Spanish Intake"] = pd.read_excel(latest_download, sheet_name="Calls",engine='openpyxl')
+            if(has_calls):
+                reports["Spanish Intake"] = pd.read_excel(latest_download, sheet_name="Calls",engine='openpyxl')
+            else:
+                reports["Spanish Intake"] = pd.DataFrame()
 
             os.remove(latest_download)
 
@@ -171,10 +181,12 @@ def get_reports():
 
             latest_download = get_latest_download_s()
 
-            open_save_excel_file(latest_download)
+            has_calls = open_save_excel_file(latest_download)
 
-
-            reports["English Reception"] = pd.read_excel(latest_download, sheet_name="Calls",engine='openpyxl')
+            if(has_calls):
+                reports["English Reception"] = pd.read_excel(latest_download, sheet_name="Calls",engine='openpyxl')
+            else:
+                reports["English Reception"] = pd.DataFrame()
 
             os.remove(latest_download)
 
@@ -206,10 +218,11 @@ def get_reports():
 
             latest_download = get_latest_download_s()
 
-            open_save_excel_file(latest_download)
-
-
-            reports["Spanish Reception"] = pd.read_excel(latest_download, sheet_name="Calls",engine='openpyxl')
+            has_calls = open_save_excel_file(latest_download)
+            if(has_calls):
+                reports["Spanish Reception"] = pd.read_excel(latest_download, sheet_name="Calls",engine='openpyxl')
+            else:
+                reports["Spanish Reception"] = pd.DataFrame()
 
             os.remove(latest_download)
 
@@ -267,9 +280,13 @@ def get_reports():
 
             latest_download = get_latest_download_s()
 
-            open_save_excel_file(latest_download)
+            has_calls = open_save_excel_file(latest_download)
 
-            reports["Queue Calls"] = pd.read_excel(latest_download, sheet_name="Calls",engine='openpyxl')
+            if(has_calls):
+                reports["Queue Calls"] = pd.read_excel(latest_download, sheet_name="Calls",engine='openpyxl')
+            else:
+                reports["Queue Calls"] = pd.DataFrame()
+
 
             os.remove(latest_download)
 
@@ -324,10 +341,12 @@ def get_reports():
 
             latest_download = get_latest_download_s()
 
-            open_save_excel_file(latest_download)
+            has_calls = open_save_excel_file(latest_download)
 
-
-            reports["IVR"] = pd.read_excel(latest_download, sheet_name="Calls",engine='openpyxl')
+            if(has_calls):
+                reports["IVR"] = pd.read_excel(latest_download, sheet_name="Calls",engine='openpyxl')
+            else:
+                reports["IVR"] = pd.DataFrame()
 
             os.remove(latest_download)
 

@@ -80,7 +80,7 @@ def get_reports():
             calendar_button.click()
             time.sleep(2)
 
-            last_work_week_option = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, """dp_1_preset_4""")))
+            last_work_week_option = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, """dp_1_dr_presets_preset_3""")))
             last_work_week_option.click()
 
             done_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[1]/div[2]/div/div[1]/div/div[2]/div/div[2]/div[2]/button[2]""")))

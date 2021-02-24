@@ -3,6 +3,7 @@ import glob
 import time
 import atexit
 import pandas as pd
+import openpyxl
 from dotenv import load_dotenv
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
@@ -41,6 +42,9 @@ def get_latest_download_s():
 
     return latest_download
 
+def open_save_excel_file(file_path):
+    wb = openpyxl.load_workbook(file_path)
+    wb.save(file_path)
 
 
 def get_reports():
@@ -80,7 +84,7 @@ def get_reports():
             calendar_button.click()
             time.sleep(2)
 
-            last_work_week_option = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, """dp_1_dr_presets_preset_3""")))
+            last_work_week_option = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, """dp_1_dr_presets_preset_4""")))
             last_work_week_option.click()
 
             done_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[1]/div[2]/div/div[1]/div/div[2]/div/div[2]/div[2]/button[2]""")))
@@ -100,6 +104,8 @@ def get_reports():
             excel_button.click()
 
             latest_download = get_latest_download_s()
+
+            open_save_excel_file(latest_download)
 
             reports["English Intake"] = pd.read_excel(latest_download, sheet_name="Calls",engine='openpyxl')
 
@@ -132,6 +138,9 @@ def get_reports():
 
             latest_download = get_latest_download_s()
 
+            open_save_excel_file(latest_download)
+
+
             reports["Spanish Intake"] = pd.read_excel(latest_download, sheet_name="Calls",engine='openpyxl')
 
             os.remove(latest_download)
@@ -162,6 +171,9 @@ def get_reports():
 
             latest_download = get_latest_download_s()
 
+            open_save_excel_file(latest_download)
+
+
             reports["English Reception"] = pd.read_excel(latest_download, sheet_name="Calls",engine='openpyxl')
 
             os.remove(latest_download)
@@ -190,8 +202,12 @@ def get_reports():
 
             excel_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, """excel""")))
             excel_button.click()
+            time.sleep(2)
 
             latest_download = get_latest_download_s()
+
+            open_save_excel_file(latest_download)
+
 
             reports["Spanish Reception"] = pd.read_excel(latest_download, sheet_name="Calls",engine='openpyxl')
 
@@ -216,7 +232,7 @@ def get_reports():
             calendar_button.click()
             time.sleep(2)
 
-            last_work_week_option = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, """dp_1_preset_4""")))
+            last_work_week_option = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, """dp_1_dr_presets_preset_4""")))
             last_work_week_option.click()
 
             done_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[1]/div[2]/div/div[1]/div/div[2]/div/div[2]/div[2]/button[2]""")))
@@ -251,6 +267,8 @@ def get_reports():
 
             latest_download = get_latest_download_s()
 
+            open_save_excel_file(latest_download)
+
             reports["Queue Calls"] = pd.read_excel(latest_download, sheet_name="Calls",engine='openpyxl')
 
             os.remove(latest_download)
@@ -274,7 +292,7 @@ def get_reports():
             calendar_button.click()
             time.sleep(2)
 
-            last_work_week_option = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, """dp_1_preset_4""")))
+            last_work_week_option = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, """dp_1_dr_presets_preset_4""")))
             last_work_week_option.click()
 
             done_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[1]/div[2]/div/div[1]/div/div[2]/div/div[2]/div[2]/button[2]""")))
@@ -305,6 +323,9 @@ def get_reports():
             excel_button.click()
 
             latest_download = get_latest_download_s()
+
+            open_save_excel_file(latest_download)
+
 
             reports["IVR"] = pd.read_excel(latest_download, sheet_name="Calls",engine='openpyxl')
 

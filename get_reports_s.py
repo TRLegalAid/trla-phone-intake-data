@@ -3,6 +3,7 @@ import glob
 import time
 import atexit
 import pandas as pd
+import openpyxl
 from dotenv import load_dotenv
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
@@ -38,7 +39,12 @@ def get_latest_download_s():
             latest_download = max(all_download, key=os.path.getmtime)
 
     #print(latest_download)
+
     return latest_download
+
+def open_save_excel_file(file_path):
+    wb = openpyxl.load_workbook(file_path)
+    wb.save(file_path)
 
 
 def get_reports():
@@ -49,7 +55,7 @@ def get_reports():
     foobar_path = os.path.expanduser('~')+"/Downloads/foobar.txt"
     foobar_file = open(foobar_path,"w")
     foobar_file.close()
-
+    
 
     authorize_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[1]/div[2]/button""")))
     authorize_button.click()
@@ -99,6 +105,8 @@ def get_reports():
 
             latest_download = get_latest_download_s()
 
+            open_save_excel_file(latest_download)
+
             reports["English Intake"] = pd.read_excel(latest_download, sheet_name="Calls",engine='openpyxl')
 
             os.remove(latest_download)
@@ -130,6 +138,9 @@ def get_reports():
 
             latest_download = get_latest_download_s()
 
+            open_save_excel_file(latest_download)
+
+
             reports["Spanish Intake"] = pd.read_excel(latest_download, sheet_name="Calls",engine='openpyxl')
 
             os.remove(latest_download)
@@ -160,6 +171,9 @@ def get_reports():
 
             latest_download = get_latest_download_s()
 
+            open_save_excel_file(latest_download)
+
+
             reports["English Reception"] = pd.read_excel(latest_download, sheet_name="Calls",engine='openpyxl')
 
             os.remove(latest_download)
@@ -188,8 +202,12 @@ def get_reports():
 
             excel_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, """excel""")))
             excel_button.click()
+            time.sleep(2)
 
             latest_download = get_latest_download_s()
+
+            open_save_excel_file(latest_download)
+
 
             reports["Spanish Reception"] = pd.read_excel(latest_download, sheet_name="Calls",engine='openpyxl')
 
@@ -240,17 +258,16 @@ def get_reports():
 
             done_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div/div[2]/div/div[1]/div[2]/div[2]/button[2]""")))
             done_button.click()
-            time.sleep(2)
 
             download_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[1]/div[2]/div/div[2]/div[1]/div/div/button""")))
             download_button.click()
-            time.sleep(2)
 
             excel_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, """excel""")))
             excel_button.click()
-            time.sleep(2)
 
             latest_download = get_latest_download_s()
+
+            open_save_excel_file(latest_download)
 
             reports["Queue Calls"] = pd.read_excel(latest_download, sheet_name="Calls",engine='openpyxl')
 
@@ -266,7 +283,6 @@ def get_reports():
 
 
     time.sleep(3)
-
     # get Top Level IVR Calls
     for tries in range(5):
         try:
@@ -299,17 +315,17 @@ def get_reports():
 
             done_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div/div[2]/div/div[1]/div[2]/div[2]/button[2]""")))
             done_button.click()
-            time.sleep(2)
 
             download_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[1]/div[2]/div/div[2]/div[1]/div/div/button""")))
             download_button.click()
-            time.sleep(2)
 
             excel_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, """excel""")))
             excel_button.click()
-            time.sleep(2)
 
             latest_download = get_latest_download_s()
+
+            open_save_excel_file(latest_download)
+
 
             reports["IVR"] = pd.read_excel(latest_download, sheet_name="Calls",engine='openpyxl')
 
@@ -325,7 +341,7 @@ def get_reports():
 
     time.sleep(3)
     input("All done - press enter and the chrome browser will close.\n")
-
+    
     os.remove(foobar_path)
 
     return reports

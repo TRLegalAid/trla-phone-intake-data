@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 from oauth2client.service_account import ServiceAccountCredentials
 from get_reports_s import combine_reports
 
+
 load_dotenv()
 
 # returns a client to use for accessing our google sheet

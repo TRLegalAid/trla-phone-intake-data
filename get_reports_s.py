@@ -10,6 +10,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
+from webdriver_manager.chrome import ChromeDriverManager
+
 
 load_dotenv()
 RINGCENTRAL_USERNAME, RINGCENTRAL_PASSWORD = os.getenv("RINGCENTRAL_USERNAME"), os.getenv("RINGCENTRAL_PASSWORD")
@@ -18,7 +20,8 @@ options = Options()
 options.add_argument('--no-sandbox')
 options.add_argument("window-size=1920,1080")
 # options.headless = True
-driver = webdriver.Chrome("./chromedriver", options=options)
+
+driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 
 def close_driver():
     driver.close()
@@ -84,21 +87,21 @@ def get_reports():
             calls_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[2]/div/div[1]/div/div[3]/div""")))
             calls_button.click()
 
-            calendar_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[1]/div[2]/div/div[1]/button/span[2]""")))
+            calendar_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[1]/div[2]/div/div[1]/div[1]/button/span[2]""")))
             calendar_button.click()
             time.sleep(2)
 
-            last_work_week_option = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, """dp_1_dr_presets_preset_4""")))
+            last_work_week_option = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[1]/div[2]/div/div[1]/div[2]/div/div[2]/div/div[1]/div/div/div[1]/div/div[5]""")))
             last_work_week_option.click()
 
-            done_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[1]/div[2]/div/div[1]/div/div[2]/div/div[2]/div[2]/button[2]""")))
+            done_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[1]/div[2]/div/div[1]/div[2]/div/div[2]/div/div[2]/div[2]/button[2]""")))
             done_button.click()
 
-            queues_drop_down_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="select_4_0_value"]""")))
+            queues_drop_down_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="select_40_value"]""")))
             queues_drop_down_button.click()
             time.sleep(2)
 
-            trla_intake_english_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[4]/div/div/div[2]/div/div[1]/div/div[2]/div/div/div[5]""")))
+            trla_intake_english_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="select_4_4"]""")))
             trla_intake_english_button.click()
 
             download_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[1]/div[2]/div/div[2]/div[1]/div/div/button""")))
@@ -112,7 +115,7 @@ def get_reports():
             has_calls = open_save_excel_file(latest_download)
 
             if(has_calls):
-                reports["English Intake"] = pd.read_excel(latest_download, sheet_name="Calls",engine='openpyxl')
+                reports["English Intake"] = pd.read_excel(latest_download, sheet_name="Calls",engine='openpyxl',converters={'Call Start Time': str, 'Handle Time':str, 'Call Length':str})
             else:
                 reports["English Intake"] = pd.DataFrame()
 
@@ -130,11 +133,11 @@ def get_reports():
     # get spanish intake queue calls
     for tries in range(5):
         try:
-            queues_drop_down_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="select_4_0_value"]""")))
+            queues_drop_down_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="select_40_value"]""")))
             queues_drop_down_button.click()
             time.sleep(2)
 
-            trla_intake_spanish_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[4]/div/div/div[2]/div/div[1]/div/div[2]/div/div/div[7]""")))
+            trla_intake_spanish_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="select_4_6"]/div/div/div/div/div""")))
             trla_intake_spanish_button.click()
 
             download_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[1]/div[2]/div/div[2]/div[1]/div/div/button""")))
@@ -148,7 +151,7 @@ def get_reports():
             has_calls = open_save_excel_file(latest_download)
 
             if(has_calls):
-                reports["Spanish Intake"] = pd.read_excel(latest_download, sheet_name="Calls",engine='openpyxl')
+                reports["Spanish Intake"] = pd.read_excel(latest_download, sheet_name="Calls",engine='openpyxl', converters={'Call Start Time': str, 'Handle Time':str, 'Call Length':str})
             else:
                 reports["Spanish Intake"] = pd.DataFrame()
 
@@ -165,11 +168,11 @@ def get_reports():
     # get english reception queue calls
     for tries in range(5):
         try:
-            queues_drop_down_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="select_4_0_value"]""")))
+            queues_drop_down_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="select_40_value"]""")))
             queues_drop_down_button.click()
             time.sleep(2)
 
-            trla_reception_english_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[4]/div/div/div[2]/div/div[1]/div/div[2]/div/div/div[8]""")))
+            trla_reception_english_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="select_4_7"]/div/div/div/div/div""")))
             trla_reception_english_button.click()
 
             download_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[1]/div[2]/div/div[2]/div[1]/div/div/button""")))
@@ -183,7 +186,7 @@ def get_reports():
             has_calls = open_save_excel_file(latest_download)
 
             if(has_calls):
-                reports["English Reception"] = pd.read_excel(latest_download, sheet_name="Calls",engine='openpyxl')
+                reports["English Reception"] = pd.read_excel(latest_download, sheet_name="Calls",engine='openpyxl', converters={'Call Start Time': str, 'Handle Time':str, 'Call Length':str})
             else:
                 reports["English Reception"] = pd.DataFrame()
 
@@ -200,11 +203,11 @@ def get_reports():
     # get spanish reception queue calls
     for tries in range(5):
         try:
-            queues_drop_down_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="select_4_0_value"]""")))
+            queues_drop_down_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="select_40_value"]""")))
             queues_drop_down_button.click()
             time.sleep(2)
 
-            trla_reception_spanish_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[4]/div/div/div[2]/div/div[1]/div/div[2]/div/div/div[9]""")))
+            trla_reception_spanish_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="select_4_8"]/div/div/div/div/div""")))
             trla_reception_spanish_button.click()
 
             download_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[1]/div[2]/div/div[2]/div[1]/div/div/button""")))
@@ -218,7 +221,7 @@ def get_reports():
 
             has_calls = open_save_excel_file(latest_download)
             if(has_calls):
-                reports["Spanish Reception"] = pd.read_excel(latest_download, sheet_name="Calls",engine='openpyxl')
+                reports["Spanish Reception"] = pd.read_excel(latest_download, sheet_name="Calls",engine='openpyxl', converters={'Call Start Time': str, 'Handle Time':str, 'Call Length':str})
             else:
                 reports["Spanish Reception"] = pd.DataFrame()
 
@@ -239,35 +242,35 @@ def get_reports():
         try:
             driver.refresh()
 
-            calendar_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[1]/div[2]/div/div[1]/button/span[2]""")))
+            calendar_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[1]/div[2]/div/div[1]/div[1]/button/span[2]""")))
             calendar_button.click()
             time.sleep(2)
 
-            last_work_week_option = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, """dp_1_dr_presets_preset_4""")))
+            last_work_week_option = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[1]/div[2]/div/div[1]/div[2]/div/div[2]/div/div[1]/div/div/div[1]/div/div[5]""")))
             last_work_week_option.click()
 
-            done_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[1]/div[2]/div/div[1]/div/div[2]/div/div[2]/div[2]/button[2]""")))
+            done_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[1]/div[2]/div/div[1]/div[2]/div/div[2]/div/div[2]/div[2]/button[2]""")))
             done_button.click()
 
-            users_groups_depts_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="ext_filter_1_0_value"]""")))
+            users_groups_depts_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div[1]/div/div/div[2]/div/div/div/div""")))
             users_groups_depts_button.click()
 
-            queues_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="ext_filter_1_queues"]/div/div/div/div/div""")))
+            queues_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div[1]/div[1]/div/div[5]/div/div/div/div/div""")))
             queues_button.click()
 
-            intake_english_checkbox = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div/div[2]/div/div[1]/div[1]/div[2]/div[2]/div/div/div[2]/div[3]/div/div[1]""")))
+            intake_english_checkbox = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div[1]/div[2]/div[2]/div/div[2]/div[3]/div[2]/div/div/div/div/div""")))
             intake_english_checkbox.click()
 
-            intake_spanish_checkbox = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div/div[2]/div/div[1]/div[1]/div[2]/div[2]/div/div/div[2]/div[5]""")))
+            intake_spanish_checkbox = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div[1]/div[2]/div[2]/div/div[2]/div[5]/div[2]/div/div/div/div/div""")))
             intake_spanish_checkbox.click()
 
-            reception_english_checkbox = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div/div[2]/div/div[1]/div[1]/div[2]/div[2]/div/div/div[2]/div[6]""")))
+            reception_english_checkbox = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div[1]/div[2]/div[2]/div/div[2]/div[6]/div[2]/div/div/div/div/div""")))
             reception_english_checkbox.click()
 
-            reception_spanish_checkbox = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div/div[2]/div/div[1]/div[1]/div[2]/div[2]/div/div/div[2]/div[7]""")))
+            reception_spanish_checkbox = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div[1]/div[2]/div[2]/div/div[2]/div[7]/div[2]/div/div/div/div/div""")))
             reception_spanish_checkbox.click()
 
-            done_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div/div[2]/div/div[1]/div[2]/div[2]/button[2]""")))
+            done_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div[2]/div[2]/button[2]""")))
             done_button.click()
 
             download_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[1]/div[2]/div/div[2]/div[1]/div/div/button""")))
@@ -275,13 +278,14 @@ def get_reports():
 
             excel_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, """excel""")))
             excel_button.click()
+            time.sleep(2)
 
             latest_download = get_latest_download_s()
 
             has_calls = open_save_excel_file(latest_download)
 
             if(has_calls):
-                reports["Queue Calls"] = pd.read_excel(latest_download, sheet_name="Calls",engine='openpyxl')
+                reports["Queue Calls"] = pd.read_excel(latest_download, sheet_name="Calls",engine='openpyxl', converters={'Call Start Time': str, 'Handle Time':str, 'Call Length':str})
             else:
                 reports["Queue Calls"] = pd.DataFrame()
 
@@ -302,46 +306,50 @@ def get_reports():
         try:
             driver.refresh()
 
-            calendar_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[1]/div[2]/div/div[1]/button/span[2]""")))
+            calendar_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[1]/div[2]/div/div[1]/div[1]/button/span[2]""")))
             calendar_button.click()
             time.sleep(2)
 
-            last_work_week_option = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, """dp_1_dr_presets_preset_4""")))
+            last_work_week_option = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[1]/div[2]/div/div[1]/div[2]/div/div[2]/div/div[1]/div/div/div[1]/div/div[5]""")))
             last_work_week_option.click()
 
-            done_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[1]/div[2]/div/div[1]/div/div[2]/div/div[2]/div[2]/button[2]""")))
+            done_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[1]/div[2]/div/div[1]/div[2]/div/div[2]/div/div[2]/div[2]/button[2]""")))
             done_button.click()
 
-            users_groups_depts_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="ext_filter_1_0_value"]""")))
+            users_groups_depts_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div[1]/div/div/div[2]/div/div/div/div""")))
             users_groups_depts_button.click()
 
-            ivr_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="ext_filter_1_ivrs"]/div/div/div/div/div""")))
+            ivr_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div[1]/div[1]/div/div[4]/div/div/div/div/div""")))
             ivr_button.click()
 
-            main_menu_checkbox = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div/div[2]/div/div[1]/div[1]/div[2]/div[2]/div/div/div[2]/div[4]""")))
+            main_menu_checkbox = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div[1]/div[2]/div[2]/div/div[2]/div[4]/div[2]/div""")))
             main_menu_checkbox.click()
 
-            receptionist_checkbox = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div/div[2]/div/div[1]/div[1]/div[2]/div[2]/div/div/div[2]/div[7]""")))
+            receptionist_checkbox = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div[1]/div[2]/div[2]/div/div[2]/div[7]/div[2]/div""")))
             receptionist_checkbox.click()
 
-            top_menu_checkbox = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div/div[2]/div/div[1]/div[1]/div[2]/div[2]/div/div/div[2]/div[8]""")))
+            top_menu_checkbox = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div[1]/div[2]/div[2]/div/div[2]/div[8]/div[2]""")))
             top_menu_checkbox.click()
 
-            done_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div/div[2]/div/div[1]/div[2]/div[2]/button[2]""")))
+            done_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div[2]/div[2]/button[2]""")))
             done_button.click()
+            time.sleep(5)
 
             download_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[1]/div[2]/div/div[2]/div[1]/div/div/button""")))
             download_button.click()
+            time.sleep(2)
+
 
             excel_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, """excel""")))
             excel_button.click()
+            time.sleep(2)
 
             latest_download = get_latest_download_s()
 
             has_calls = open_save_excel_file(latest_download)
 
             if(has_calls):
-                reports["IVR"] = pd.read_excel(latest_download, sheet_name="Calls",engine='openpyxl')
+                reports["IVR"] = pd.read_excel(latest_download, sheet_name="Calls",engine='openpyxl', converters={'Call Start Time': str, 'Handle Time':str, 'Call Length':str})
             else:
                 reports["IVR"] = pd.DataFrame()
 
@@ -357,10 +365,11 @@ def get_reports():
 
     time.sleep(3)
     input("All done - press enter and the chrome browser will close.\n")
-<<<<<<< HEAD
-=======
 
->>>>>>> a8f79f9e28f8ac138b65de30f186e7cef7fff05d
+# <<<<<<< HEAD
+# =======
+# >>>>>>> a8f79f9e28f8ac138b65de30f186e7cef7fff05d
+
     os.remove(foobar_path)
 
     return reports

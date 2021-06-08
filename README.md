@@ -10,7 +10,7 @@ Python, Selenium, Google Sheets
 
 The script add_reports_to_google_sheet.py uses the get_reports_s.py script to automatically download the performance reports and add them to our google sheet. 
 
-Requires chromedriver installation. 
+Requires [chromedriver installation](https://chromedriver.chromium.org/downloads). 
 
 To run the task, use python add_reports_to_google_sheet.py 
 

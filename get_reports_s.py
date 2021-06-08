@@ -215,7 +215,7 @@ def get_reports():
 
             excel_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, """excel""")))
             excel_button.click()
-            time.sleep(2)
+            time.sleep(5)
 
             latest_download = get_latest_download_s()
 
@@ -278,7 +278,7 @@ def get_reports():
 
             excel_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, """excel""")))
             excel_button.click()
-            time.sleep(2)
+            time.sleep(5)
 
             latest_download = get_latest_download_s()
 
@@ -342,16 +342,20 @@ def get_reports():
 
             excel_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, """excel""")))
             excel_button.click()
-            time.sleep(2)
+            time.sleep(3)
 
             latest_download = get_latest_download_s()
+            time.sleep(3)
 
             has_calls = open_save_excel_file(latest_download)
+            time.sleep(3)
 
             if(has_calls):
                 reports["IVR"] = pd.read_excel(latest_download, sheet_name="Calls",engine='openpyxl', converters={'Call Start Time': str, 'Handle Time':str, 'Call Length':str})
             else:
                 reports["IVR"] = pd.DataFrame()
+            time.sleep(3)
+
 
             os.remove(latest_download)
 
@@ -374,6 +378,7 @@ def get_reports():
 
     return reports
 
+time.sleep(3)
 def combine_reports():
     reports = get_reports()
     calls_report = reports["English Intake"].append(reports["Spanish Intake"]).append(reports["English Reception"]).append(reports["Spanish Reception"])

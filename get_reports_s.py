@@ -37,11 +37,11 @@ def get_latest_download_s():
 
     # wait until file is downloaded
     while(latest_download[-3:] == "txt"):
-            time.sleep(1)
+            time.sleep(5)
             all_download = glob.glob(os.path.expanduser('~')+"/Downloads/*")
             latest_download = max(all_download, key=os.path.getmtime)
 
-    #print(latest_download)
+    print(latest_download)
 
     return latest_download
 
@@ -345,16 +345,16 @@ def get_reports():
             time.sleep(3)
 
             latest_download = get_latest_download_s()
-            time.sleep(3)
+            time.sleep(5)
 
             has_calls = open_save_excel_file(latest_download)
-            time.sleep(3)
+            time.sleep(5)
 
             if(has_calls):
                 reports["IVR"] = pd.read_excel(latest_download, sheet_name="Calls",engine='openpyxl', converters={'Call Start Time': str, 'Handle Time':str, 'Call Length':str})
             else:
                 reports["IVR"] = pd.DataFrame()
-            time.sleep(3)
+            time.sleep(5)
 
 
             os.remove(latest_download)
@@ -367,7 +367,7 @@ def get_reports():
                 print(f"Failed to get Top Level IVR calls on all 5 attempts, here's the last error message:\n{error}.")
                 exit()
 
-    time.sleep(3)
+    time.sleep(5)
     input("All done - press enter and the chrome browser will close.\n")
 
 # <<<<<<< HEAD
@@ -378,7 +378,7 @@ def get_reports():
 
     return reports
 
-time.sleep(3)
+time.sleep(5)
 def combine_reports():
     reports = get_reports()
     calls_report = reports["English Intake"].append(reports["Spanish Intake"]).append(reports["English Reception"]).append(reports["Spanish Reception"])

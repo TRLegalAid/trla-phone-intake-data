@@ -14,6 +14,8 @@ Requires [chromedriver installation](https://chromedriver.chromium.org/downloads
 
 To run the task, use python add_reports_to_google_sheet.py 
 
+**NOTE**: do not resize Google Chrome window while crawler runs!
+
 The scripts in the ringcentral_api_code were Alex’s attempts at using RingCentral’s API to create the performance reports, but it was unclear whether this method would yield the same exact results as the performance reports from the browser. With more time one could try using this code and comparing results. 
 
 ## Room for Improvement 

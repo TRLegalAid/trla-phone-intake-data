@@ -13,6 +13,9 @@ The script add_reports_to_google_sheet.py uses the get_reports_s.py script to au
 
 * To run the task, navigate to the project directory in your command prompt and run `python add_reports_to_google_sheet.py`
 
+**NOTE**: do not resize Google Chrome window while crawler runs!
+
+The scripts in the ringcentral_api_code were Alex’s attempts at using RingCentral’s API to create the performance reports, but it was unclear whether this method would yield the same exact results as the performance reports from the browser. With more time one could try using this code and comparing results. 
 
 ## Set up
 

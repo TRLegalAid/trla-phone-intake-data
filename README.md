@@ -1,4 +1,5 @@
 # trla-phone-intake-data
+Mary test!
 Web crawler written in Python using Selenium to get performance reports from RingCentral and add them to a Google Sheet for internal data tracking of TRLA phone calls.
 
 
@@ -15,7 +16,7 @@ The script add_reports_to_google_sheet.py uses the get_reports_s.py script to au
 
 **NOTE**: do not resize Google Chrome window while crawler runs!
 
-The scripts in the ringcentral_api_code were Alex’s attempts at using RingCentral’s API to create the performance reports, but it was unclear whether this method would yield the same exact results as the performance reports from the browser. With more time one could try using this code and comparing results. 
+The scripts in the ringcentral_api_code were Alex’s attempts at using RingCentral’s API to create the performance reports, but it was unclear whether this method would yield the same exact results as the performance reports from the browser. With more time one could try using this code and comparing results.
 
 ## Set up
 

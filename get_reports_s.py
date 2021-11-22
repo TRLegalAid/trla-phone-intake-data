@@ -37,7 +37,7 @@ def get_latest_download_s():
 
     # wait until file is downloaded
     while(latest_download[-3:] == "txt"):
-            time.sleep(5)
+            time.sleep(2)
             all_download = glob.glob(os.path.expanduser('~')+"/Downloads/*")
             latest_download = max(all_download, key=os.path.getmtime)
 
@@ -85,9 +85,11 @@ def get_reports():
     for tries in range(5):
         try:
             calls_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[2]/div/div[1]/div/div[3]/div""")))
+            print(calls_button)
             calls_button.click()
 
-            calendar_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[1]/div[2]/div/div[1]/div[1]/button/span[2]""")))
+            calendar_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[1]/div[2]/div/div[1]/div[1]/button/div/div/div/span""")))
+            # previous xpath://*[@id="globalId"]/div/main/div/div[1]/div[2]/div/div[1]/div[1]/button/span[2]
             calendar_button.click()
             time.sleep(2)
 
@@ -101,7 +103,12 @@ def get_reports():
             queues_drop_down_button.click()
             time.sleep(2)
 
-            trla_intake_english_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="select_4_4"]""")))
+            trla_intake_english_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="select_4_5"]""")))
+            # previous xpath: //*[@id="select_4_4"]
+            # expected new xpath: //*[@id="select_2_5"]
+            # //*[@id="select_2_5"]/div/div/div/div/div
+            # //*[@id="select_2_4"]/div/div/div/div/div
+            # try 4_5?
             trla_intake_english_button.click()
 
             download_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[1]/div[2]/div/div[2]/div[1]/div/div/button""")))
@@ -137,7 +144,8 @@ def get_reports():
             queues_drop_down_button.click()
             time.sleep(2)
 
-            trla_intake_spanish_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="select_4_6"]/div/div/div/div/div""")))
+            trla_intake_spanish_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="select_4_7"]""")))
+            # previous xpath: //*[@id="select_4_6"]/div/div/div/div/div
             trla_intake_spanish_button.click()
 
             download_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[1]/div[2]/div/div[2]/div[1]/div/div/button""")))
@@ -172,7 +180,8 @@ def get_reports():
             queues_drop_down_button.click()
             time.sleep(2)
 
-            trla_reception_english_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="select_4_7"]/div/div/div/div/div""")))
+            trla_reception_english_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="select_4_8"]/div/div/div/div/div""")))
+            # previous xpath: //*[@id="select_4_7"]/div/div/div/div/div
             trla_reception_english_button.click()
 
             download_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[1]/div[2]/div/div[2]/div[1]/div/div/button""")))
@@ -207,7 +216,8 @@ def get_reports():
             queues_drop_down_button.click()
             time.sleep(2)
 
-            trla_reception_spanish_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="select_4_8"]/div/div/div/div/div""")))
+            trla_reception_spanish_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="select_4_9"]/div/div/div/div/div""")))
+            # previous xpath://*[@id="select_4_8"]/div/div/div/div/div
             trla_reception_spanish_button.click()
 
             download_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[1]/div[2]/div/div[2]/div[1]/div/div/button""")))
@@ -215,7 +225,7 @@ def get_reports():
 
             excel_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, """excel""")))
             excel_button.click()
-            time.sleep(5)
+            time.sleep(2)
 
             latest_download = get_latest_download_s()
 
@@ -242,7 +252,8 @@ def get_reports():
         try:
             driver.refresh()
 
-            calendar_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[1]/div[2]/div/div[1]/div[1]/button/span[2]""")))
+            calendar_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[1]/div[2]/div/div[1]/div[1]/button/div/div/div/span""")))
+            # previous xpath: //*[@id="globalId"]/div/main/div/div[1]/div[2]/div/div[1]/div[1]/button/span[2]
             calendar_button.click()
             time.sleep(2)
 
@@ -254,21 +265,35 @@ def get_reports():
 
             users_groups_depts_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div[1]/div/div/div[2]/div/div/div/div""")))
             users_groups_depts_button.click()
+            time.sleep(2)
 
             queues_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div[1]/div[1]/div/div[5]/div/div/div/div/div""")))
             queues_button.click()
+            time.sleep(2)
 
-            intake_english_checkbox = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div[1]/div[2]/div[2]/div/div[2]/div[3]/div[2]/div/div/div/div/div""")))
+            intake_english_checkbox = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div[1]/div[2]/div[2]/div/div[2]/div[4]/div[2]/div/div/div/div/div""")))
+            # previous xpath: /html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div[1]/div[2]/div[2]/div/div[2]/div[3]/div[2]/div/div/div/div/div
+            # expected xpath:  /html/body/div/div/div[2]/div[2]/portal/div/div[2]/div[3]/div/div/div[2]/div[1]/div[2]/div[2]/div/div[2]/div[4]/div[2]/div/div/div/div/div
             intake_english_checkbox.click()
+            time.sleep(2)
 
-            intake_spanish_checkbox = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div[1]/div[2]/div[2]/div/div[2]/div[5]/div[2]/div/div/div/div/div""")))
+            intake_spanish_checkbox = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div[1]/div[2]/div[2]/div/div[2]/div[6]/div[2]/div/div/div/div/div""")))
+            #previous xpath: /html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div[1]/div[2]/div[2]/div/div[2]/div[5]/div[2]/div/div/div/div/div
+            #expected     : /html/body/div/div/div[2]/div[2]/portal/div/div[2]/div[3]/div/div/div[2]/div[1]/div[2]/div[2]/div/div[2]/div[6]/div[2]/div/div/div/div/div
             intake_spanish_checkbox.click()
+            time.sleep(2)
 
-            reception_english_checkbox = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div[1]/div[2]/div[2]/div/div[2]/div[6]/div[2]/div/div/div/div/div""")))
+            reception_english_checkbox = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div[1]/div[2]/div[2]/div/div[2]/div[7]/div[2]/div/div/div/div/div""")))
+            # previously: /html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div[1]/div[2]/div[2]/div/div[2]/div[6]/div[2]/div/div/div/div/div
+            # expected: /html/body/div/div/div[2]/div[2]/portal/div/div[2]/div[3]/div/div/div[2]/div[1]/div[2]/div[2]/div/div[2]/div[7]/div[2]/div/div/div/div/div
             reception_english_checkbox.click()
+            time.sleep(2)
 
-            reception_spanish_checkbox = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div[1]/div[2]/div[2]/div/div[2]/div[7]/div[2]/div/div/div/div/div""")))
+            reception_spanish_checkbox = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div[1]/div[2]/div[2]/div/div[2]/div[8]/div[2]/div/div/div/div/div""")))
+            # previously: /html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div[1]/div[2]/div[2]/div/div[2]/div[7]/div[2]/div/div/div/div/div
+            # expected: /html/body/div/div/div[2]/div[2]/portal/div/div[2]/div[3]/div/div/div[2]/div[1]/div[2]/div[2]/div/div[2]/div[8]/div[2]/div/div/div/div/div
             reception_spanish_checkbox.click()
+            time.sleep(2)
 
             done_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div[2]/div[2]/button[2]""")))
             done_button.click()
@@ -278,7 +303,7 @@ def get_reports():
 
             excel_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, """excel""")))
             excel_button.click()
-            time.sleep(5)
+            time.sleep(2)
 
             latest_download = get_latest_download_s()
 
@@ -306,7 +331,8 @@ def get_reports():
         try:
             driver.refresh()
 
-            calendar_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[1]/div[2]/div/div[1]/div[1]/button/span[2]""")))
+            calendar_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[1]/div[2]/div/div[1]/div[1]/button/div/div/div/span""")))
+            #previous: //*[@id="globalId"]/div/main/div/div[1]/div[2]/div/div[1]/div[1]/button/span[2]
             calendar_button.click()
             time.sleep(2)
 
@@ -318,22 +344,31 @@ def get_reports():
 
             users_groups_depts_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div[1]/div/div/div[2]/div/div/div/div""")))
             users_groups_depts_button.click()
+            time.sleep(2)
 
             ivr_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div[1]/div[1]/div/div[4]/div/div/div/div/div""")))
             ivr_button.click()
+            time.sleep(2)
 
             main_menu_checkbox = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div[1]/div[2]/div[2]/div/div[2]/div[4]/div[2]/div""")))
             main_menu_checkbox.click()
+            time.sleep(2)
 
-            receptionist_checkbox = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div[1]/div[2]/div[2]/div/div[2]/div[7]/div[2]/div""")))
+            receptionist_checkbox = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div[1]/div[2]/div[2]/div/div[2]/div[10]/div[2]/div""")))
+            # previous xpath: /html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div[1]/div[2]/div[2]/div/div[2]/div[7]/div[2]/div
+            # expected xpath: /html/body/div/div/div[2]/div[2]/portal/div/div[2]/div[3]/div/div/div[2]/div[1]/div[2]/div[2]/div/div[2]/div[10]/div[2]/div/div/div/div/div
             receptionist_checkbox.click()
+            time.sleep(2)
 
-            top_menu_checkbox = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div[1]/div[2]/div[2]/div/div[2]/div[8]/div[2]""")))
+            top_menu_checkbox = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div[1]/div[2]/div[2]/div/div[2]/div[11]/div[2]""")))
+            # previous: /html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div[1]/div[2]/div[2]/div/div[2]/div[8]/div[2]
+            # expected: /html/body/div/div/div[2]/div[2]/portal/div/div[2]/div[3]/div/div/div[2]/div[1]/div[2]/div[2]/div/div[2]/div[11]/div[2]/div/div/div/div/div
             top_menu_checkbox.click()
+            time.sleep(2)
 
             done_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div[2]/div[2]/button[2]""")))
             done_button.click()
-            time.sleep(5)
+            time.sleep(2)
 
             download_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[1]/div[2]/div/div[2]/div[1]/div/div/button""")))
             download_button.click()
@@ -345,16 +380,16 @@ def get_reports():
             time.sleep(3)
 
             latest_download = get_latest_download_s()
-            time.sleep(5)
+            time.sleep(2)
 
             has_calls = open_save_excel_file(latest_download)
-            time.sleep(5)
+            time.sleep(2)
 
             if(has_calls):
                 reports["IVR"] = pd.read_excel(latest_download, sheet_name="Calls",engine='openpyxl', converters={'Call Start Time': str, 'Handle Time':str, 'Call Length':str})
             else:
                 reports["IVR"] = pd.DataFrame()
-            time.sleep(5)
+            time.sleep(2)
 
 
             os.remove(latest_download)
@@ -367,7 +402,7 @@ def get_reports():
                 print(f"Failed to get Top Level IVR calls on all 5 attempts, here's the last error message:\n{error}.")
                 exit()
 
-    time.sleep(5)
+    time.sleep(2)
     input("All done - press enter and the chrome browser will close.\n")
 
 # <<<<<<< HEAD
@@ -378,7 +413,7 @@ def get_reports():
 
     return reports
 
-time.sleep(5)
+time.sleep(2)
 def combine_reports():
     reports = get_reports()
     calls_report = reports["English Intake"].append(reports["Spanish Intake"]).append(reports["English Reception"]).append(reports["Spanish Reception"])

@@ -1,5 +1,4 @@
 # trla-phone-intake-data
-Mary test!
 Web crawler written in Python using Selenium to get performance reports from RingCentral and add them to a Google Sheet for internal data tracking of TRLA phone calls.
 
 
@@ -38,6 +37,7 @@ The scripts in the ringcentral_api_code were Alex’s attempts at using RingCent
     * Sometimes the wrong report gets written to Top Level IVR. You can tell that this has happened when the script writes a relatively low number of rows (less than 4000) to the spreadsheet, or if that number is lower than the number of rows for All Queues or Calls
     * Sometimes XPATHS need to be re-determined. In Chrome, I go onto RingCentral, right click an element that needs to be "clicked" by the crawler, and "Inspect" the element.  Right click on the html that pops up on the left side, select "Copy" and then XPATH (sometimes, only "Full XPATH" works).
     * Don't resize the window while crawler is crawling!
+    * If you've created a new Google Sheets document to write results to, make sure you've shared that file with our service account (found in the client_email field in the .env file) so that the script can find it!
 
 ### If you need to access the RingCentral data manually:
     * Getting into RingCentral manually --

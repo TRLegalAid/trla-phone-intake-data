@@ -37,7 +37,7 @@ def get_latest_download_s():
 
     # wait until file is downloaded
     while(latest_download[-3:] == "txt"):
-            time.sleep(2)
+            time.sleep(5)
             all_download = glob.glob(os.path.expanduser('~')+"/Downloads/*")
             latest_download = max(all_download, key=os.path.getmtime)
 
@@ -225,7 +225,7 @@ def get_reports():
 
             excel_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, """excel""")))
             excel_button.click()
-            time.sleep(2)
+            time.sleep(5)
 
             latest_download = get_latest_download_s()
 
@@ -303,7 +303,7 @@ def get_reports():
 
             excel_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, """excel""")))
             excel_button.click()
-            time.sleep(2)
+            time.sleep(5)
 
             latest_download = get_latest_download_s()
 
@@ -368,7 +368,7 @@ def get_reports():
 
             done_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div[2]/div[2]/button[2]""")))
             done_button.click()
-            time.sleep(2)
+            time.sleep(5)
 
             download_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[1]/div[2]/div/div[2]/div[1]/div/div/button""")))
             download_button.click()
@@ -380,16 +380,16 @@ def get_reports():
             time.sleep(3)
 
             latest_download = get_latest_download_s()
-            time.sleep(2)
+            time.sleep(5)
 
             has_calls = open_save_excel_file(latest_download)
-            time.sleep(2)
+            time.sleep(5)
 
             if(has_calls):
                 reports["IVR"] = pd.read_excel(latest_download, sheet_name="Calls",engine='openpyxl', converters={'Call Start Time': str, 'Handle Time':str, 'Call Length':str})
             else:
                 reports["IVR"] = pd.DataFrame()
-            time.sleep(2)
+            time.sleep(5)
 
 
             os.remove(latest_download)
@@ -402,7 +402,7 @@ def get_reports():
                 print(f"Failed to get Top Level IVR calls on all 5 attempts, here's the last error message:\n{error}.")
                 exit()
 
-    time.sleep(2)
+    time.sleep(5)
     input("All done - press enter and the chrome browser will close.\n")
 
 # <<<<<<< HEAD
@@ -413,7 +413,7 @@ def get_reports():
 
     return reports
 
-time.sleep(2)
+time.sleep(5)
 def combine_reports():
     reports = get_reports()
     calls_report = reports["English Intake"].append(reports["Spanish Intake"]).append(reports["English Reception"]).append(reports["Spanish Reception"])

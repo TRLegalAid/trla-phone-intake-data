@@ -91,10 +91,24 @@ def get_reports():
             calendar_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[1]/div[2]/div/div[1]/div[1]/button/div/div/div/span""")))
             # previous xpath://*[@id="globalId"]/div/main/div/div[1]/div[2]/div/div[1]/div[1]/button/span[2]
             calendar_button.click()
-            time.sleep(2)
+            time.sleep(5)
 
-            last_work_week_option = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[1]/div[2]/div/div[1]/div[2]/div/div[2]/div/div[1]/div/div/div[1]/div/div[5]""")))
+            last_work_week_option = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/portal/div/div[2]/div[3]/div/div/div[2]/div[1]/div/div/div[1]/div/div[1]/div/div/div[2]""")))
             last_work_week_option.click()
+            #Last Work Week Xpath:
+            #/html/body/div/div/div[2]/div[2]/portal/div/div[2]/div[3]/div/div/div[2]/div[1]/div/div/div[1]/div/div[1]/div/div/div[2]
+
+            #custom_dates_option = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[1]/div[2]/div/div[1]/div[2]/div/div[2]/div/div[1]/div/div/div[1]/div/div[1]""")))
+            #custom_dates_option.click()
+
+            #start_custom_date = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[1]/div[2]/div/div[1]/div[2]/div/div[2]/div/div[1]/div/div/div[2]/div[2]/div[2]/div[2]/div[2]/div[30]""")))
+            #start_custom_date.click()
+            #xpath to select 12/20/21: /html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[1]/div[2]/div/div[1]/div[2]/div/div[2]/div/div[1]/div/div/div[2]/div[2]/div[2]/div[2]/div[2]/div[30]
+
+            #end_custom_date = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[1]/div[2]/div/div[1]/div[2]/div/div[2]/div/div[1]/div/div/div[2]/div[2]/div[2]/div[2]/div[2]/div[34]""")))
+            #end_custom_date.click()
+            #xpath to select 12/24/21: /html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[1]/div[2]/div/div[1]/div[2]/div/div[2]/div/div[1]/div/div/div[2]/div[2]/div[2]/div[2]/div[2]/div[34]
+
 
             done_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[1]/div[2]/div/div[1]/div[2]/div/div[2]/div/div[2]/div[2]/button[2]""")))
             done_button.click()
@@ -260,6 +274,17 @@ def get_reports():
             last_work_week_option = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[1]/div[2]/div/div[1]/div[2]/div/div[2]/div/div[1]/div/div/div[1]/div/div[5]""")))
             last_work_week_option.click()
 
+            #custom_dates_option = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[1]/div[2]/div/div[1]/div[2]/div/div[2]/div/div[1]/div/div/div[1]/div/div[1]""")))
+            #custom_dates_option.click()
+
+            #start_custom_date = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[1]/div[2]/div/div[1]/div[2]/div/div[2]/div/div[1]/div/div/div[2]/div[2]/div[2]/div[2]/div[2]/div[30]""")))
+            #start_custom_date.click()
+            #xpath to select 12/20/21: /html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[1]/div[2]/div/div[1]/div[2]/div/div[2]/div/div[1]/div/div/div[2]/div[2]/div[2]/div[2]/div[2]/div[30]
+
+            #end_custom_date = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[1]/div[2]/div/div[1]/div[2]/div/div[2]/div/div[1]/div/div/div[2]/div[2]/div[2]/div[2]/div[2]/div[34]""")))
+            #end_custom_date.click()
+            #xpath to select 12/24/21: /html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[1]/div[2]/div/div[1]/div[2]/div/div[2]/div/div[1]/div/div/div[2]/div[2]/div[2]/div[2]/div[2]/div[34]
+
             done_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[1]/div[2]/div/div[1]/div[2]/div/div[2]/div/div[2]/div[2]/button[2]""")))
             done_button.click()
 
@@ -339,6 +364,17 @@ def get_reports():
             last_work_week_option = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[1]/div[2]/div/div[1]/div[2]/div/div[2]/div/div[1]/div/div/div[1]/div/div[5]""")))
             last_work_week_option.click()
 
+            #custom_dates_option = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[1]/div[2]/div/div[1]/div[2]/div/div[2]/div/div[1]/div/div/div[1]/div/div[1]""")))
+            #custom_dates_option.click()
+
+            #start_custom_date = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[1]/div[2]/div/div[1]/div[2]/div/div[2]/div/div[1]/div/div/div[2]/div[2]/div[2]/div[2]/div[2]/div[30]""")))
+            #start_custom_date.click()
+            #xpath to select 12/20/21: /html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[1]/div[2]/div/div[1]/div[2]/div/div[2]/div/div[1]/div/div/div[2]/div[2]/div[2]/div[2]/div[2]/div[30]
+
+            #end_custom_date = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[1]/div[2]/div/div[1]/div[2]/div/div[2]/div/div[1]/div/div/div[2]/div[2]/div[2]/div[2]/div[2]/div[34]""")))
+            #end_custom_date.click()
+            #xpath to select 12/24/21: /html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[1]/div[2]/div/div[1]/div[2]/div/div[2]/div/div[1]/div/div/div[2]/div[2]/div[2]/div[2]/div[2]/div[34]
+
             done_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """//*[@id="globalId"]/div/main/div/div[1]/div[2]/div/div[1]/div[2]/div/div[2]/div/div[2]/div[2]/button[2]""")))
             done_button.click()
 
@@ -413,7 +449,7 @@ def get_reports():
 
     return reports
 
-time.sleep(5)
+time.sleep(20)
 def combine_reports():
     reports = get_reports()
     calls_report = reports["English Intake"].append(reports["Spanish Intake"]).append(reports["English Reception"]).append(reports["Spanish Reception"])

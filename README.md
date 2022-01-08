@@ -39,6 +39,15 @@ The scripts in the ringcentral_api_code were Alex’s attempts at using RingCent
     * Don't resize the window while crawler is crawling!
     * If you've created a new Google Sheets document to write results to, make sure you've shared that file with our service account (found in the client_email field in the .env file) so that the script can find it!
 
+* What if I need to change the XPATHs?
+    * Sometimes we need to change the XPATHS that the crawler navigates to due to changes in RingCentral, or maybe we forget to run the crawler and need to run for a period prior to the previous week.
+    * There are now options for custom date XPATH entry written into get_reports_s that you can uncomment, and update with the xpath specific to your date range for the start and end date.
+    * To find XPATHs:
+      * While on the site of your desired xpath: Right-click, select "Inspect", which should open a side bar with HTML code. You can move the side bar to the bottom of your screen if it helps.
+      * With the sidebar open, click again on the site you want to find an xpath for. It should highlight a small section of the HTML code.
+      * Navigate to the small, highlighted section of HTML, right-click, and Copy => Copy full xpath.
+      * Paste the xpath into the correct part of get_reports_s! This may require some trial and error, but it usually works out in the end.
+
 ### If you need to access the RingCentral data manually:
     * Getting into RingCentral manually --
         * Go [here](https://www.ringcentral.com/)

@@ -93,10 +93,10 @@ def get_reports():
             calendar_button.click()
             time.sleep(5)
 
-            last_work_week_option = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/portal/div/div[2]/div[3]/div/div/div[2]/div[1]/div/div/div[1]/div/div[1]/div/div/div[2]""")))
+            last_work_week_option = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[1]/div[2]/div/div[1]/div[2]/div/div[2]/div/div[1]/div/div/div[1]/div/div[5]""")))
             last_work_week_option.click()
             #Last Work Week Xpath:
-            #/html/body/div/div/div[2]/div[2]/portal/div/div[2]/div[3]/div/div/div[2]/div[1]/div/div/div[1]/div/div[1]/div/div/div[2]
+            #/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[1]/div[2]/div/div[1]/div[2]/div/div[2]/div/div[1]/div/div/div[1]/div/div[5]
 
             #custom_dates_option = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[1]/div[2]/div/div[1]/div[2]/div/div[2]/div/div[1]/div/div/div[1]/div/div[1]""")))
             #custom_dates_option.click()
@@ -272,7 +272,7 @@ def get_reports():
             time.sleep(2)
 
             last_work_week_option = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[1]/div[2]/div/div[1]/div[2]/div/div[2]/div/div[1]/div/div/div[1]/div/div[5]""")))
-            last_work_week_option.click()
+            last_work_week_option.click()            
 
             #custom_dates_option = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, """/html/body/div/div/div[2]/div[2]/div[2]/div/main/div/div[1]/div[2]/div/div[1]/div[2]/div/div[2]/div/div[1]/div/div/div[1]/div/div[1]""")))
             #custom_dates_option.click()
